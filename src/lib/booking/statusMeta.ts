@@ -7,25 +7,25 @@ export const SLOT_STATUS_META: Record<
   AVAILABLE: {
     label: "Kosong",
     dot: "bg-success",
-    badgeClass: "bg-success/10 text-success border-success/30",
+    badgeClass: "border-success/40 bg-white text-success hover:bg-success/10",
     selectable: true,
   },
   HELD: {
     label: "Menunggu Bayaran",
     dot: "bg-amber-500",
-    badgeClass: "bg-amber-50 text-amber-700 border-amber-300",
+    badgeClass: "border-amber-300 bg-amber-50 text-amber-700",
     selectable: false,
   },
   CONFIRMED: {
-    label: "Ditempah",
+    label: "Penuh",
     dot: "bg-destructive",
-    badgeClass: "bg-destructive/10 text-destructive border-destructive/30",
+    badgeClass: "border-destructive bg-destructive text-white",
     selectable: false,
   },
   CLOSED: {
     label: "Ditutup",
-    dot: "bg-slate-500",
-    badgeClass: "bg-slate-100 text-slate-600 border-slate-300",
+    dot: "bg-slate-400",
+    badgeClass: "border-transparent bg-muted text-muted-foreground/60",
     selectable: false,
   },
 };

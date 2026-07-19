@@ -51,7 +51,10 @@ function AuthArea({ onNavigate, mobile }: { onNavigate?: () => void; mobile?: bo
       <Button render={<Link href="/login" onClick={onNavigate} />} variant={mobile ? "outline" : "ghost"}>
         Log Masuk
       </Button>
-      <Button render={<Link href="/facilities" onClick={onNavigate} />} className="bg-primary hover:bg-primary/90">
+      <Button
+        render={<Link href="/facilities" onClick={onNavigate} />}
+        className="bg-accent font-heading font-bold uppercase tracking-wide text-accent-foreground hover:bg-accent/90"
+      >
         Tempah Sekarang
       </Button>
     </div>
@@ -62,20 +65,24 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary font-heading text-lg font-bold text-primary-foreground">
-            P
+        <Link href="/" className="flex items-center gap-2.5">
+          <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-md bg-primary font-heading text-lg font-bold text-primary-foreground">
+            <span className="absolute inset-1 rounded-[3px] border border-white/30" aria-hidden />P
           </span>
-          <span className="font-heading text-lg font-bold leading-none text-foreground">
+          <span className="font-heading text-xl font-bold uppercase leading-none tracking-wide text-foreground">
             PPUWTR <span className="text-primary">Arena</span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="text-sm font-medium text-foreground/80 hover:text-primary">
+            <Link
+              key={l.href}
+              href={l.href}
+              className="text-sm font-semibold text-foreground/70 transition-colors hover:text-primary"
+            >
               {l.label}
             </Link>
           ))}
@@ -86,9 +93,10 @@ export function Navbar() {
         </div>
 
         <button
-          className="flex h-10 w-10 items-center justify-center rounded-md md:hidden"
+          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md md:hidden"
           onClick={() => setOpen((v) => !v)}
-          aria-label="Buka menu"
+          aria-label={open ? "Tutup menu" : "Buka menu"}
+          aria-expanded={open}
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -98,7 +106,7 @@ export function Navbar() {
         <div className="border-t border-border bg-background px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-4">
             {links.map((l) => (
-              <Link key={l.href} href={l.href} className="text-base font-medium" onClick={() => setOpen(false)}>
+              <Link key={l.href} href={l.href} className="text-base font-semibold" onClick={() => setOpen(false)}>
                 {l.label}
               </Link>
             ))}

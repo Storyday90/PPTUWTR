@@ -3,7 +3,8 @@ import { Footer } from "@/components/shared/footer";
 import { Hero } from "@/components/landing/hero";
 import { StatsBar } from "@/components/landing/stats-bar";
 import { FacilitiesShowcase } from "@/components/landing/facilities-showcase";
-import { Gallery } from "@/components/landing/gallery";
+import { HowItWorks } from "@/components/landing/how-it-works";
+import { CtaBand } from "@/components/landing/cta-band";
 import { FAQ } from "@/components/landing/faq";
 import { MapEmbed } from "@/components/landing/map-embed";
 
@@ -15,7 +16,8 @@ export default function Home() {
         <Hero />
         <StatsBar />
         <FacilitiesShowcase />
-        <Gallery />
+        <HowItWorks />
+        <CtaBand />
         <FAQ />
         <MapEmbed />
       </main>

@@ -7,7 +7,11 @@ import { cn } from "@/lib/utils";
 const FAQS = [
   {
     q: "Bagaimana cara membuat tempahan?",
-    a: "Pilih kemudahan yang anda mahu, pilih tarikh dan slot masa yang kosong, isi butiran hubungan, dan selesaikan pembayaran. Anda akan menerima kod tempahan sebagai pengesahan.",
+    a: "Pilih kemudahan yang anda mahu, buka kalendar dan pilih slot masa yang kosong, isi butiran hubungan, dan selesaikan pembayaran. Anda akan menerima kod tempahan sebagai pengesahan.",
+  },
+  {
+    q: "Apakah maksud slot berwarna merah pada kalendar?",
+    a: "Slot merah bermaksud waktu tersebut telah penuh ditempah. Hanya slot kosong (bergaris hijau) boleh dipilih — status kalendar dikemas kini secara automatik setiap beberapa saat.",
   },
   {
     q: "Adakah tempahan boleh bertindih dengan pengguna lain?",
@@ -27,21 +31,28 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <h2 className="text-center font-heading text-3xl font-bold">Soalan Lazim</h2>
-      <div className="mt-8 space-y-3">
+    <section id="faq" className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+      <p className="text-center font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+        Soalan Lazim
+      </p>
+      <h2 className="mt-2 text-center font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">
+        Ada Pertanyaan?
+      </h2>
+      <div className="mt-10 space-y-3">
         {FAQS.map((item, i) => (
           <div key={item.q} className="overflow-hidden rounded-xl border border-border bg-card">
             <button
-              className="flex w-full items-center justify-between gap-4 p-4 text-left font-medium"
+              className="flex w-full cursor-pointer items-center justify-between gap-4 p-4 text-left font-semibold"
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              aria-expanded={openIndex === i}
             >
               {item.q}
               <ChevronDown
                 className={cn("h-4 w-4 shrink-0 transition-transform", openIndex === i && "rotate-180")}
+                aria-hidden
               />
             </button>
-            {openIndex === i && <p className="px-4 pb-4 text-sm text-muted-foreground">{item.a}</p>}
+            {openIndex === i && <p className="px-4 pb-4 text-sm leading-relaxed text-muted-foreground">{item.a}</p>}
           </div>
         ))}
       </div>

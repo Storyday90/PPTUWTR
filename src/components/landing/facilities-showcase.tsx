@@ -1,34 +1,64 @@
 import Link from "next/link";
-import { SportIcon } from "@/components/icons/sport-icons";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { sportImage } from "@/lib/sportImages";
 
 const FACILITIES = [
-  { name: "Badminton", slug: "badminton" },
-  { name: "Pickleball", slug: "pickleball" },
-  { name: "Futsal", slug: "futsal" },
-  { name: "Ping Pong", slug: "ping-pong" },
-  { name: "Dewan Seminar", slug: "dewan-seminar" },
+  { name: "Badminton", slug: "badminton", note: "4 gelanggang bertaraf pertandingan", featured: true },
+  { name: "Futsal", slug: "futsal", note: "Gelanggang dalam dewan" },
+  { name: "Pickleball", slug: "pickleball", note: "Sukan paling pantas berkembang" },
+  { name: "Ping Pong", slug: "ping-pong", note: "Meja piawai ITTF" },
+  { name: "Dewan Seminar", slug: "dewan-seminar", note: "Untuk majlis & bengkel" },
 ];
 
 export function FacilitiesShowcase() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-      <h2 className="text-center font-heading text-3xl font-bold">Kemudahan Kami</h2>
-      <p className="mx-auto mt-2 max-w-xl text-center text-muted-foreground">
-        Semua kemudahan di Dewan Dato&apos; Haji Samsudin bin Haji Abu Hassan boleh ditempah dalam talian.
-      </p>
-      <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-        {FACILITIES.map((f) => (
-          <Link
-            key={f.slug}
-            href={`/facilities?sport=${f.slug}`}
-            className="group flex flex-col items-center gap-3 rounded-xl border border-border bg-card p-6 text-center transition-colors hover:border-primary hover:shadow-md"
-          >
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-              <SportIcon slug={f.slug} className="h-7 w-7" />
-            </span>
-            <span className="font-heading text-sm font-semibold">{f.name}</span>
-          </Link>
-        ))}
+    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">Kemudahan</p>
+          <h2 className="mt-2 font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">
+            Pilih Gelanggang Anda
+          </h2>
+        </div>
+        <Link
+          href="/facilities"
+          className="group flex items-center gap-1.5 font-heading text-sm font-semibold uppercase tracking-wide text-primary hover:text-primary/80"
+        >
+          Lihat semua
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+        </Link>
+      </div>
+
+      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {FACILITIES.map((f) => {
+          const img = sportImage(f.slug);
+          return (
+            <Link
+              key={f.slug}
+              href={`/facilities?sport=${f.slug}`}
+              className={`group relative overflow-hidden rounded-xl ${f.featured ? "aspect-[4/3] sm:col-span-2 sm:aspect-[2/1]" : "aspect-[4/3]"}`}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-pitch/90 via-pitch/20 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
+                <div>
+                  <h3 className="font-heading text-2xl font-bold uppercase text-white">{f.name}</h3>
+                  <p className="mt-0.5 text-sm text-white/70">{f.note}</p>
+                </div>
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground opacity-0 transition-opacity group-hover:opacity-100">
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

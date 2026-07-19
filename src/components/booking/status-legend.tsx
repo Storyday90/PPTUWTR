@@ -1,12 +1,18 @@
-import { SLOT_STATUS_META } from "@/lib/booking/statusMeta";
+const LEGEND = [
+  { label: "Kosong — boleh ditempah", swatch: "border border-success/40 bg-white" },
+  { label: "Dipilih", swatch: "bg-primary" },
+  { label: "Penuh", swatch: "bg-destructive" },
+  { label: "Menunggu bayaran", swatch: "border border-amber-300 bg-amber-50" },
+  { label: "Ditutup", swatch: "bg-muted" },
+];
 
 export function StatusLegend({ className }: { className?: string }) {
   return (
-    <div className={`flex flex-wrap items-center gap-4 text-sm ${className ?? ""}`}>
-      {Object.entries(SLOT_STATUS_META).map(([status, meta]) => (
-        <div key={status} className="flex items-center gap-1.5">
-          <span className={`h-2.5 w-2.5 rounded-full ${meta.dot}`} />
-          <span className="text-muted-foreground">{meta.label}</span>
+    <div className={`flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs ${className ?? ""}`}>
+      {LEGEND.map((item) => (
+        <div key={item.label} className="flex items-center gap-1.5">
+          <span className={`h-3 w-3 rounded-sm ${item.swatch}`} />
+          <span className="text-muted-foreground">{item.label}</span>
         </div>
       ))}
     </div>

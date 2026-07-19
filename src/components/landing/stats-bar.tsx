@@ -7,23 +7,25 @@ export function StatsBar() {
   const { data, isLoading } = useStats();
 
   const items = [
-    { label: "Jumlah Gelanggang", value: data?.totalCourts },
+    { label: "Gelanggang", value: data?.totalCourts },
     { label: "Tempahan Hari Ini", value: data?.bookingsToday },
     { label: "Slot Kosong Hari Ini", value: data?.availableSlotsToday },
     { label: "Jenis Kemudahan", value: data?.sportCount },
   ];
 
   return (
-    <section className="border-b border-border bg-card">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 py-8 sm:px-6 md:grid-cols-4">
+    <section className="border-t border-pitch-foreground/10 bg-pitch text-pitch-foreground" aria-label="Papan skor hari ini">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 divide-pitch-foreground/10 px-4 py-8 sm:px-6 md:grid-cols-4 md:divide-x">
         {items.map((item) => (
-          <div key={item.label} className="text-center">
+          <div key={item.label} className="px-4 py-3 text-center">
             {isLoading ? (
-              <Skeleton className="mx-auto h-8 w-16" />
+              <Skeleton className="mx-auto h-10 w-16 bg-pitch-foreground/10" />
             ) : (
-              <p className="font-heading text-3xl font-bold text-primary">{item.value ?? "–"}</p>
+              <p className="font-heading text-5xl font-bold leading-none text-accent">{item.value ?? "–"}</p>
             )}
-            <p className="mt-1 text-xs text-muted-foreground sm:text-sm">{item.label}</p>
+            <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-pitch-foreground/60">
+              {item.label}
+            </p>
           </div>
         ))}
       </div>
