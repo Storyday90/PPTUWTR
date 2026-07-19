@@ -1,12 +1,21 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { CourtLinesPattern } from "@/components/icons/court-lines-pattern";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary to-[#0a2c68] text-primary-foreground">
-      <CourtLinesPattern className="absolute inset-0 h-full w-full text-white/[0.06]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(245,158,11,0.25),_transparent_55%)]" />
+    <section className="relative overflow-hidden bg-primary text-primary-foreground">
+      <Image
+        src="/images/dewan-hero.jpg"
+        alt="Gelanggang badminton di Dewan Dato' Haji Samsudin bin Haji Abu Hassan"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary/60" />
+      <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(245,158,11,0.2),_transparent_55%)]" />
       <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
         <p className="text-sm font-medium uppercase tracking-widest text-primary-foreground/70">
           Persatuan Penduduk Taman Universiti Wallagonia Tapah Road
