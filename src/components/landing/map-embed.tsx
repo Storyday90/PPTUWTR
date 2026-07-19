@@ -1,7 +1,9 @@
+import { Reveal } from "@/components/motion/reveal";
+
 export function MapEmbed() {
   return (
-    <section className="border-t border-border bg-card py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="border-t border-border bg-card py-24 sm:py-28">
+      <Reveal className="mx-auto max-w-6xl px-4 sm:px-6">
         <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">Lokasi</p>
         <h2 className="mt-2 font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">Cara ke Dewan</h2>
         <p className="mt-3 max-w-xl text-muted-foreground">
@@ -15,7 +17,7 @@ export function MapEmbed() {
             loading="lazy"
           />
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

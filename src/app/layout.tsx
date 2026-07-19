@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/components/providers/query-provider";
+import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import "./globals.css";
 
 const barlow = Barlow({
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="ms" className={`${barlow.variable} ${barlowCondensed.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans text-base">
         <QueryProvider>
+          <SmoothScroll />
           {children}
           <Toaster richColors position="top-center" />
         </QueryProvider>

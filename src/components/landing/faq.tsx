@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/motion/reveal";
 
 const FAQS = [
   {
@@ -31,14 +32,16 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-      <p className="text-center font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-        Soalan Lazim
-      </p>
-      <h2 className="mt-2 text-center font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">
-        Ada Pertanyaan?
-      </h2>
-      <div className="mt-10 space-y-3">
+    <section id="faq" className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-28">
+      <Reveal>
+        <p className="text-center font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+          Soalan Lazim
+        </p>
+        <h2 className="mt-2 text-center font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">
+          Ada Pertanyaan?
+        </h2>
+      </Reveal>
+      <Reveal stagger={0.07} className="mt-10 space-y-3">
         {FAQS.map((item, i) => (
           <div key={item.q} className="overflow-hidden rounded-xl border border-border bg-card">
             <button
@@ -55,7 +58,7 @@ export function FAQ() {
             {openIndex === i && <p className="px-4 pb-4 text-sm leading-relaxed text-muted-foreground">{item.a}</p>}
           </div>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { sportImage } from "@/lib/sportImages";
+import { Reveal } from "@/components/motion/reveal";
 
 const FACILITIES = [
   { name: "Badminton", slug: "badminton", note: "4 gelanggang bertaraf pertandingan", featured: true },
@@ -13,8 +14,8 @@ const FACILITIES = [
 
 export function FacilitiesShowcase() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
+    <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-28">
+      <Reveal className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">Kemudahan</p>
           <h2 className="mt-2 font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">
@@ -28,9 +29,9 @@ export function FacilitiesShowcase() {
           Lihat semua
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
         </Link>
-      </div>
+      </Reveal>
 
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <Reveal stagger={0.1} className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {FACILITIES.map((f) => {
           const img = sportImage(f.slug);
           return (
@@ -59,7 +60,7 @@ export function FacilitiesShowcase() {
             </Link>
           );
         })}
-      </div>
+      </Reveal>
     </section>
   );
 }

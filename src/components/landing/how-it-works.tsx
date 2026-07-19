@@ -1,4 +1,5 @@
 import { CalendarCheck2, CreditCard, PartyPopper } from "lucide-react";
+import { Reveal } from "@/components/motion/reveal";
 
 const STEPS = [
   {
@@ -21,13 +22,15 @@ const STEPS = [
 export function HowItWorks() {
   return (
     <section className="border-y border-border bg-card">
-      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">Cara Tempahan</p>
-        <h2 className="mt-2 font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">
-          Tiga Langkah, Siap
-        </h2>
+      <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-28">
+        <Reveal>
+          <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">Cara Tempahan</p>
+          <h2 className="mt-2 font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">
+            Tiga Langkah, Siap
+          </h2>
+        </Reveal>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <Reveal stagger={0.12} className="mt-12 grid gap-8 md:grid-cols-3">
           {STEPS.map((step, i) => (
             <div key={step.title} className="relative rounded-xl border border-border bg-background p-6">
               <div className="flex items-center gap-4">
@@ -42,13 +45,15 @@ export function HowItWorks() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
 
-        <p className="mt-8 rounded-lg bg-secondary px-4 py-3 text-sm text-secondary-foreground">
-          <span className="font-semibold">Jaminan tiada pertindihan:</span> jika dua pengguna cuba menempah slot yang
-          sama serentak, pangkalan data kami hanya membenarkan seorang berjaya — yang seorang lagi dimaklumkan
-          serta-merta.
-        </p>
+        <Reveal delay={0.15}>
+          <p className="mt-8 rounded-lg bg-secondary px-4 py-3 text-sm text-secondary-foreground">
+            <span className="font-semibold">Jaminan tiada pertindihan:</span> jika dua pengguna cuba menempah slot yang
+            sama serentak, pangkalan data kami hanya membenarkan seorang berjaya — yang seorang lagi dimaklumkan
+            serta-merta.
+          </p>
+        </Reveal>
       </div>
     </section>
   );
