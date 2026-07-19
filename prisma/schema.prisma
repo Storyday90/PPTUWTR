@@ -1,0 +1,186 @@
+// PPUWTR Arena — booking platform for Dewan Dato' Haji Samsudin bin Haji Abu Hassan
+// Dev datasource: SQLite (zero-install). Cutover to Postgres before production —
+// see README.md "SQLite -> Postgres cutover" for the one-time migration regen steps.
+//
+// Design notes:
+// - No Prisma `enum`: status fields are plain String + TS union types, so the
+//   schema provider can flip sqlite -> postgresql without touching field types.
+// - No Prisma `Json`: amenitiesJson/photosJson/payloadJson are serialized JSON
+//   strings via src/lib/utils/json.ts, for identical behavior on both providers.
+// - Money is always Int (sen / cents). Never Decimal/Float.
+// - Anti-double-booking guarantee lives entirely in BookingSlot's
+//   @@unique([courtId, slotStart]) constraint — see src/lib/booking/createHold.ts.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  phone         String?
+  name          String
+  passwordHash  String?
+  role          String         @default("CUSTOMER") // CUSTOMER | ADMIN
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  sessions      Session[]
+  bookings      Booking[]
+  notifications Notification[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Branch {
+  id         String     @id @default(cuid())
+  name       String
+  address    String?
+  createdAt  DateTime   @default(now())
+  facilities Facility[]
+}
+
+model Facility {
+  id          String   @id @default(cuid())
+  branchId    String?
+  branch      Branch?  @relation(fields: [branchId], references: [id])
+  name        String
+  slug        String   @unique
+  description String?
+  address     String?
+  mapUrl      String?
+  heroImage   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  courts      Court[]
+}
+
+model Sport {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  icon      String?
+  createdAt DateTime @default(now())
+  courts    Court[]
+}
+
+model Court {
+  id               String        @id @default(cuid())
+  facilityId       String
+  facility         Facility      @relation(fields: [facilityId], references: [id])
+  sportId          String
+  sport            Sport         @relation(fields: [sportId], references: [id])
+  name             String
+  description      String?
+  capacity         Int
+  hourlyPriceCents Int
+  amenitiesJson    String? // serialized JSON string array
+  photosJson       String? // serialized JSON string array of URLs (stub storage)
+  slotMinutes      Int           @default(60)
+  openTime         String        @default("08:00")
+  closeTime        String        @default("23:00")
+  isActive         Boolean       @default(true)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  bookingSlots     BookingSlot[]
+  blockedSlots     BlockedSlot[]
+  bookings         Booking[]
+
+  @@index([facilityId])
+  @@index([sportId])
+}
+
+model BookingSlot {
+  id            String    @id @default(cuid())
+  courtId       String
+  court         Court     @relation(fields: [courtId], references: [id])
+  slotStart     DateTime
+  slotEnd       DateTime
+  status        String // HELD | CONFIRMED
+  holdExpiresAt DateTime?
+  bookingId     String
+  booking       Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  createdAt     DateTime  @default(now())
+
+  @@unique([courtId, slotStart]) // <-- the anti-double-booking constraint
+  @@index([holdExpiresAt])
+  @@index([courtId, slotStart])
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  code            String        @unique // e.g. PPUWTR-20260719-4F2K
+  userId          String?
+  user            User?         @relation(fields: [userId], references: [id])
+  courtId         String
+  court           Court         @relation(fields: [courtId], references: [id])
+  contactName     String
+  contactPhone    String
+  contactEmail    String
+  startAt         DateTime
+  endAt           DateTime
+  totalPriceCents Int
+  status          String        @default("PENDING_PAYMENT") // PENDING_PAYMENT | CONFIRMED | CANCELLED | EXPIRED
+  purpose         String?
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  slots           BookingSlot[]
+  payment         Payment?
+  notifications   Notification[]
+
+  @@index([courtId, startAt])
+  @@index([status])
+}
+
+model Payment {
+  id          String    @id @default(cuid())
+  bookingId   String    @unique
+  booking     Booking   @relation(fields: [bookingId], references: [id])
+  provider    String    @default("STUB")
+  providerRef String?
+  amountCents Int
+  status      String    @default("PENDING") // PENDING | PAID | FAILED | REFUNDED
+  paidAt      DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Notification {
+  id          String    @id @default(cuid())
+  bookingId   String?
+  booking     Booking?  @relation(fields: [bookingId], references: [id])
+  userId      String?
+  user        User?     @relation(fields: [userId], references: [id])
+  channel     String // EMAIL | WHATSAPP | SMS
+  type        String // BOOKING_HELD | BOOKING_CONFIRMED | BOOKING_CANCELLED | PAYMENT_RECEIVED
+  payloadJson String?
+  status      String    @default("QUEUED") // QUEUED | SENT | FAILED
+  createdAt   DateTime  @default(now())
+}
+
+model BlockedSlot {
+  id        String   @id @default(cuid())
+  courtId   String
+  court     Court    @relation(fields: [courtId], references: [id])
+  startAt   DateTime
+  endAt     DateTime
+  reason    String
+  createdBy String?
+  createdAt DateTime @default(now())
+
+  @@index([courtId, startAt])
+}
