@@ -34,11 +34,9 @@ export function FAQ() {
   return (
     <section id="faq" className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-28">
       <Reveal>
-        <p className="text-center font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-          Soalan Lazim
-        </p>
-        <h2 className="mt-2 text-center font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">
-          Ada Pertanyaan?
+        <p className="eyebrow text-center text-accent">Soalan Lazim</p>
+        <h2 className="mt-3 text-center font-heading text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl">
+          Ada pertanyaan?
         </h2>
       </Reveal>
       <Reveal stagger={0.07} className="mt-10 space-y-3">

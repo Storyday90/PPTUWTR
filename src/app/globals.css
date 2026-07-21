@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-barlow);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-barlow-condensed);
+  --font-heading: var(--font-playfair);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
   --color-pitch: var(--pitch);
@@ -71,83 +71,84 @@
 }
 
 :root {
-  /* PPUWTR Arena — "Court Floor" identity
-     Court-mat green, chalk-line white, championship gold.
-     Red is reserved for one meaning only: a slot that is FULL. */
-  --background: #f6f5f0;
-  --foreground: #121b15;
-  --card: #ffffff;
-  --card-foreground: #121b15;
-  --popover: #ffffff;
-  --popover-foreground: #121b15;
-  --primary: #0b6b45;
-  --primary-foreground: #ffffff;
-  --secondary: #e6f0e9;
-  --secondary-foreground: #0b5637;
-  --muted: #edece5;
-  --muted-foreground: #5c665e;
-  --accent: #f0b429;
-  --accent-foreground: #1a1503;
-  --success: #178a50;
+  /* PPUWTR Arena — "Editorial Court" identity
+     Warm bone paper, espresso ink, brass-gold accent.
+     A restrained emerald means only ONE thing: a slot is AVAILABLE.
+     Red means only ONE thing: a slot is FULL. */
+  --background: #f4f1ea;
+  --foreground: #1c1a15;
+  --card: #fbf9f4;
+  --card-foreground: #1c1a15;
+  --popover: #fbf9f4;
+  --popover-foreground: #1c1a15;
+  --primary: #221f18;
+  --primary-foreground: #f7f4ec;
+  --secondary: #eae4d7;
+  --secondary-foreground: #3a352b;
+  --muted: #ece7db;
+  --muted-foreground: #6f6858;
+  --accent: #b8801e;
+  --accent-foreground: #fdfbf4;
+  --success: #2f7d54;
   --success-foreground: #ffffff;
-  --destructive: #d92d20;
-  --border: #e0dfd6;
-  --input: #e0dfd6;
-  --ring: #0b6b45;
-  --pitch: #0b1f15;
-  --pitch-foreground: #edf5ef;
-  --chart-1: #0b6b45;
-  --chart-2: #f0b429;
-  --chart-3: #178a50;
-  --chart-4: #d92d20;
-  --chart-5: #5c665e;
-  --radius: 0.625rem;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #121b15;
-  --sidebar-primary: #0b6b45;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e6f0e9;
-  --sidebar-accent-foreground: #0b5637;
-  --sidebar-border: #e0dfd6;
-  --sidebar-ring: #0b6b45;
+  --destructive: #c1341f;
+  --border: #e1dace;
+  --input: #e1dace;
+  --ring: #b8801e;
+  --pitch: #1a1712;
+  --pitch-foreground: #f2ede2;
+  --chart-1: #b8801e;
+  --chart-2: #2f7d54;
+  --chart-3: #221f18;
+  --chart-4: #c1341f;
+  --chart-5: #6f6858;
+  --radius: 0.5rem;
+  --sidebar: #fbf9f4;
+  --sidebar-foreground: #1c1a15;
+  --sidebar-primary: #221f18;
+  --sidebar-primary-foreground: #f7f4ec;
+  --sidebar-accent: #eae4d7;
+  --sidebar-accent-foreground: #3a352b;
+  --sidebar-border: #e1dace;
+  --sidebar-ring: #b8801e;
 }
 
 .dark {
-  --background: #0b1f15;
-  --foreground: #edf5ef;
-  --card: #10291c;
-  --card-foreground: #edf5ef;
-  --popover: #10291c;
-  --popover-foreground: #edf5ef;
-  --primary: #34b981;
-  --primary-foreground: #06170f;
-  --secondary: #16382a;
-  --secondary-foreground: #d7eadd;
-  --muted: #16382a;
-  --muted-foreground: #9db3a5;
-  --accent: #f0b429;
-  --accent-foreground: #1a1503;
-  --success: #34b981;
+  --background: #16130e;
+  --foreground: #f1ece1;
+  --card: #1f1b14;
+  --card-foreground: #f1ece1;
+  --popover: #1f1b14;
+  --popover-foreground: #f1ece1;
+  --primary: #e7dcc8;
+  --primary-foreground: #1a1712;
+  --secondary: #2a251c;
+  --secondary-foreground: #e7dcc8;
+  --muted: #241f17;
+  --muted-foreground: #a89e8a;
+  --accent: #d9a943;
+  --accent-foreground: #241a06;
+  --success: #4bb37f;
   --success-foreground: #06170f;
-  --destructive: #f2655a;
+  --destructive: #e5674f;
   --border: color-mix(in oklab, #ffffff 12%, transparent);
   --input: color-mix(in oklab, #ffffff 16%, transparent);
-  --ring: #34b981;
-  --pitch: #06170f;
-  --pitch-foreground: #edf5ef;
-  --chart-1: #34b981;
-  --chart-2: #f0b429;
-  --chart-3: #178a50;
-  --chart-4: #f2655a;
-  --chart-5: #9db3a5;
-  --sidebar: #10291c;
-  --sidebar-foreground: #edf5ef;
-  --sidebar-primary: #34b981;
-  --sidebar-primary-foreground: #06170f;
-  --sidebar-accent: #16382a;
-  --sidebar-accent-foreground: #edf5ef;
+  --ring: #d9a943;
+  --pitch: #100d09;
+  --pitch-foreground: #f1ece1;
+  --chart-1: #d9a943;
+  --chart-2: #4bb37f;
+  --chart-3: #e7dcc8;
+  --chart-4: #e5674f;
+  --chart-5: #a89e8a;
+  --sidebar: #1f1b14;
+  --sidebar-foreground: #f1ece1;
+  --sidebar-primary: #e7dcc8;
+  --sidebar-primary-foreground: #1a1712;
+  --sidebar-accent: #2a251c;
+  --sidebar-accent-foreground: #e7dcc8;
   --sidebar-border: color-mix(in oklab, #ffffff 12%, transparent);
-  --sidebar-ring: #34b981;
+  --sidebar-ring: #d9a943;
 }
 
 @layer base {
@@ -156,6 +157,9 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   html {
     @apply font-sans;
@@ -165,21 +169,46 @@
   h3,
   h4 {
     @apply font-heading;
+    letter-spacing: -0.01em;
+  }
+  /* Editorial display headings sit tighter and larger */
+  h1,
+  h2 {
+    letter-spacing: -0.02em;
   }
 }
 
 @layer utilities {
-  /* Painted court-line frame — the signature device of the identity */
+  /* Thin editorial frame — a quiet gold hairline, the signature device */
   .court-frame {
     position: relative;
   }
   .court-frame::before {
     content: "";
     position: absolute;
-    inset: 0.75rem;
-    border: 2px solid color-mix(in oklab, #ffffff 35%, transparent);
-    border-radius: calc(var(--radius) * 0.8);
+    inset: 1rem;
+    border: 1px solid color-mix(in oklab, var(--accent) 45%, transparent);
     pointer-events: none;
+  }
+
+  /* Small tracked label — the magazine "kicker" / eyebrow */
+  .eyebrow {
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* Editorial serif italic for restrained emphasis inside headlines */
+  .accent-italic {
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .text-balance {
+    text-wrap: balance;
   }
 
   /* Looping editorial ticker */

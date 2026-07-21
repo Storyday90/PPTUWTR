@@ -19,11 +19,11 @@ export default function FacilitiesPage() {
       <Navbar />
       <main className="flex-1">
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-          <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">Kemudahan</p>
-          <h1 className="mt-1 font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">
-            Terokai Kemudahan
+          <p className="eyebrow text-accent">Kemudahan</p>
+          <h1 className="mt-3 font-heading text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-6xl">
+            Terokai kemudahan
           </h1>
-          <p className="mt-2 max-w-2xl text-muted-foreground">
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             Semak harga, kapasiti dan status ketersediaan setiap gelanggang di Dewan Dato&apos; Haji Samsudin bin
             Haji Abu Hassan secara masa nyata.
           </p>

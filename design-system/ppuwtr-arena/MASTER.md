@@ -6,10 +6,9 @@
 
 ---
 
-**Project:** PPUWTR Arena
-**Generated:** 2026-07-21 13:00:17
-**Category:** Sports Team/Club
-**Design Dials:** Variance 6/10 (Balanced / Modern) | Motion 7/10 (Standard)
+**Project:** ppuwtr-arena
+**Generated:** 2026-07-21 13:20:54
+**Category:** Luxury/Premium Brand
 
 ---
 
@@ -19,18 +18,18 @@
 
 | Role | Hex | CSS Variable |
 |------|-----|--------------|
-| Primary | `#18181B` | `--color-primary` |
+| Primary | `#1C1917` | `--color-primary` |
 | On Primary | `#FFFFFF` | `--color-on-primary` |
-| Secondary | `#3F3F46` | `--color-secondary` |
-| Accent/CTA | `#EC4899` | `--color-accent` |
-| Background | `#FAFAFA` | `--color-background` |
-| Foreground | `#09090B` | `--color-foreground` |
+| Secondary | `#44403C` | `--color-secondary` |
+| Accent/CTA | `#A16207` | `--color-accent` |
+| Background | `#FAFAF9` | `--color-background` |
+| Foreground | `#0C0A09` | `--color-foreground` |
 | Muted | `#E8ECF0` | `--color-muted` |
-| Border | `#E4E4E7` | `--color-border` |
+| Border | `#D6D3D1` | `--color-border` |
 | Destructive | `#DC2626` | `--color-destructive` |
-| Ring | `#18181B` | `--color-ring` |
+| Ring | `#1C1917` | `--color-ring` |
 
-**Color Notes:** Editorial black + accent pink
+**Color Notes:** Premium black + gold accent [Accent adjusted from #CA8A04 for WCAG 3:1]
 
 ### Typography
 
@@ -74,7 +73,7 @@
 ```css
 /* Primary Button */
 .btn-primary {
-  background: #EC4899;
+  background: #A16207;
   color: white;
   padding: 12px 24px;
   border-radius: 8px;
@@ -91,8 +90,8 @@
 /* Secondary Button */
 .btn-secondary {
   background: transparent;
-  color: #18181B;
-  border: 2px solid #18181B;
+  color: #1C1917;
+  border: 2px solid #1C1917;
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
@@ -105,7 +104,7 @@
 
 ```css
 .card {
-  background: #FAFAFA;
+  background: #FAFAF9;
   border-radius: 12px;
   padding: 24px;
   box-shadow: var(--shadow-md);
@@ -131,9 +130,9 @@
 }
 
 .input:focus {
-  border-color: #18181B;
+  border-color: #1C1917;
   outline: none;
-  box-shadow: 0 0 0 3px #18181B20;
+  box-shadow: 0 0 0 3px #1C191720;
 }
 ```
 
@@ -159,44 +158,28 @@
 
 ## Style Guidelines
 
-**Style:** Soft UI Evolution
+**Style:** Liquid Glass
 
-**Keywords:** Evolved soft UI, better contrast, modern aesthetics, subtle depth, accessibility-focused, improved shadows, hybrid
+**Keywords:** Flowing glass, morphing, smooth transitions, fluid effects, translucent, animated blur, iridescent, chromatic aberration
 
-**Best For:** Modern enterprise apps, SaaS platforms, health/wellness, modern business tools, professional, hybrid
+**Best For:** Premium SaaS, high-end e-commerce, creative platforms, branding experiences, luxury portfolios
 
-**Key Effects:** Improved shadows (softer than flat, clearer than neumorphism), modern (200-300ms), focus visible, WCAG AA/AAA
+**Key Effects:** Morphing elements (SVG/CSS), fluid animations (400-600ms curves), dynamic blur (backdrop-filter), color transitions
 
 ### Page Pattern
 
-**Pattern Name:** Community/Forum Landing
+**Pattern Name:** Minimal Single Column
 
-- **Conversion Strategy:** Show active community (member count, posts today). Highlight benefits. Preview content. Easy onboarding.
-- **CTA Placement:** Join button prominent + After member showcase
-- **Section Order:** 1. Hero (community value prop), 2. Popular topics/categories, 3. Active members showcase, 4. Join CTA
-
----
-
-## Motion
-
-**Stagger List** (Standard) — Trigger: load or scroll | Duration: 300-450ms | Easing: `back.out(1.4)`
-
-```js
-gsap.from('.grid-item', { opacity: 0, scale: 0.92, y: 16, duration: 0.4, stagger: { each: 0.06, from: 'start', grid: 'auto' }, ease: 'back.out(1.4)' });
-```
-
-**Framework notes:** grid: 'auto' lets GSAP infer rows/columns from a CSS grid layout for a natural wave stagger
-
-- ✅ Combine with from: 'center' for a bento-grid layout to draw the eye inward first
-- ❌ Don't use back.out on dense data tables; the overshoot reads as sloppy on informational UI
-- ⚡ Group DOM writes; avoid interleaving layout reads (getBoundingClientRect) between staggered tweens
+- **Conversion Strategy:** Single CTA focus. Large typography. Lots of whitespace. No nav clutter. Mobile-first.
+- **CTA Placement:** Center, large CTA button
+- **Section Order:** 1. Hero headline, 2. Short description, 3. Benefit bullets (3 max), 4. CTA, 5. Footer
 
 ---
 
 ## Anti-Patterns (Do NOT Use)
 
-- ❌ Static content
-- ❌ Poor fan engagement
+- ❌ Cheap visuals
+- ❌ Fast animations
 
 ### Additional Forbidden Patterns
 

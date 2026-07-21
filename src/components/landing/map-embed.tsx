@@ -4,9 +4,9 @@ export function MapEmbed() {
   return (
     <section className="border-t border-border bg-card py-24 sm:py-28">
       <Reveal className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className="font-heading text-sm font-semibold uppercase tracking-[0.2em] text-primary">Lokasi</p>
-        <h2 className="mt-2 font-heading text-4xl font-bold uppercase leading-none sm:text-5xl">Cara ke Dewan</h2>
-        <p className="mt-3 max-w-xl text-muted-foreground">
+        <p className="eyebrow text-accent">Lokasi</p>
+        <h2 className="mt-3 font-heading text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl">Cara ke Dewan</h2>
+        <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground">
           Dewan Dato&apos; Haji Samsudin bin Haji Abu Hassan, Taman Universiti Wallagonia, Tapah Road, Perak.
         </p>
         <div className="mt-8 overflow-hidden rounded-xl border border-border">

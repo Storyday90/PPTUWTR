@@ -22,13 +22,11 @@ export function StatsBar() {
             {isLoading || item.value == null ? (
               <Skeleton className="mx-auto h-10 w-16 bg-pitch-foreground/10" />
             ) : (
-              <p className="font-heading text-5xl font-bold leading-none text-accent">
+              <p className="font-heading text-6xl font-semibold leading-none text-accent">
                 <CountUp value={item.value} />
               </p>
             )}
-            <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-pitch-foreground/60">
-              {item.label}
-            </p>
+            <p className="eyebrow mt-3 text-pitch-foreground/55">{item.label}</p>
           </div>
         ))}
       </div>

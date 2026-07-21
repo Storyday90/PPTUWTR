@@ -23,14 +23,12 @@ export function CourtCard({ court }: { court: CourtDTO }) {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-pitch/70 via-transparent to-transparent" />
-        <span className="absolute bottom-3 left-4 font-heading text-sm font-bold uppercase tracking-wider text-white">
-          {court.sport.name}
-        </span>
+        <span className="eyebrow absolute bottom-3 left-4 text-white">{court.sport.name}</span>
       </div>
       <CardContent className="space-y-3 p-5">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-heading text-xl font-bold uppercase leading-tight">{court.name}</h3>
-          <p className="whitespace-nowrap font-heading text-xl font-bold text-primary">
+          <h3 className="font-heading text-2xl font-semibold leading-tight">{court.name}</h3>
+          <p className="whitespace-nowrap font-heading text-xl font-semibold text-foreground">
             {centsToRM(court.hourlyPriceCents)}
             <span className="text-xs font-normal text-muted-foreground">/jam</span>
           </p>
@@ -55,7 +53,7 @@ export function CourtCard({ court }: { court: CourtDTO }) {
 
         <Button
           render={<Link href={`/book/${court.id}`} />}
-          className="w-full bg-primary font-heading font-bold uppercase tracking-wide hover:bg-primary/90"
+          className="w-full bg-primary font-semibold hover:bg-primary/90"
         >
           Lihat Kalendar &amp; Tempah
         </Button>

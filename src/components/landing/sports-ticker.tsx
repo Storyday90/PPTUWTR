@@ -5,10 +5,10 @@ function TickerRow({ ariaHidden }: { ariaHidden?: boolean }) {
     <div aria-hidden={ariaHidden} className="flex shrink-0 items-center">
       {SPORTS.map((name) => (
         <span key={name} className="flex items-center">
-          <span className="px-6 font-heading text-lg font-bold uppercase tracking-[0.15em] sm:px-8 sm:text-xl">
+          <span className="px-6 font-heading text-lg font-medium italic sm:px-8 sm:text-2xl">
             {name}
           </span>
-          <span aria-hidden className="h-1.5 w-1.5 rotate-45 bg-pitch/40" />
+          <span aria-hidden className="h-1.5 w-1.5 rotate-45 bg-accent-foreground/40" />
         </span>
       ))}
     </div>

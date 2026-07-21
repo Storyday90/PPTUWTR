@@ -15,7 +15,7 @@ const HEADLINE = [
   { text: "Book.", accent: false },
   { text: "Play.", accent: true },
   { text: "Connect.", accent: false },
-];
+] as const;
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -62,32 +62,34 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-pitch via-transparent to-pitch/40" />
 
       <div className="court-frame relative mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="max-w-3xl py-28 sm:py-36">
-          <p className="hero-eyebrow flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-pitch-foreground/70">
+        <div className="max-w-3xl py-32 sm:py-44">
+          <p className="hero-eyebrow eyebrow flex items-center gap-2.5 text-pitch-foreground/70">
             <MapPin className="h-3.5 w-3.5 text-accent" aria-hidden />
-            Dewan Dato&apos; Haji Samsudin bin Haji Abu Hassan · Tapah Road
+            Dewan Dato&apos; Haji Samsudin · Tapah Road
           </p>
 
-          <h1 className="mt-6 font-heading text-6xl font-bold uppercase leading-[0.9] tracking-tight sm:text-8xl">
+          <h1 className="mt-7 font-heading text-6xl font-semibold leading-[0.92] tracking-[-0.02em] sm:text-8xl">
             {HEADLINE.map((line) => (
               <span key={line.text} className="block overflow-hidden pb-[0.08em]">
-                <span className={`hero-line block will-change-transform ${line.accent ? "text-accent" : ""}`}>
+                <span
+                  className={`hero-line block will-change-transform ${line.accent ? "accent-italic text-accent" : ""}`}
+                >
                   {line.text}
                 </span>
               </span>
             ))}
           </h1>
 
-          <p className="hero-copy mt-6 max-w-xl text-lg text-pitch-foreground/80">
+          <p className="hero-copy mt-8 max-w-xl text-lg leading-relaxed text-pitch-foreground/75">
             Gelanggang badminton, pickleball, futsal, ping pong dan dewan seminar milik komuniti PPUWTR — kini boleh
             ditempah dalam talian. Slot yang anda pilih dikunci serta-merta, tiada pertindihan tempahan.
           </p>
 
-          <div className="hero-ctas mt-10 flex flex-wrap items-center gap-3">
+          <div className="hero-ctas mt-11 flex flex-wrap items-center gap-3">
             <Button
               render={<Link href="/facilities" />}
               size="lg"
-              className="h-12 bg-accent px-7 font-heading text-base font-bold uppercase tracking-wide text-accent-foreground hover:bg-accent/90"
+              className="h-13 bg-accent px-8 text-base font-semibold tracking-tight text-accent-foreground shadow-lg shadow-black/20 hover:bg-accent/90"
             >
               <CalendarDays className="h-4 w-4" aria-hidden />
               Tempah Gelanggang
@@ -96,7 +98,7 @@ export function Hero() {
               render={<Link href="/booking/lookup" />}
               size="lg"
               variant="outline"
-              className="h-12 border-pitch-foreground/30 bg-transparent px-7 font-heading text-base font-semibold uppercase tracking-wide text-pitch-foreground hover:bg-pitch-foreground/10"
+              className="h-13 border-pitch-foreground/25 bg-transparent px-8 text-base font-medium text-pitch-foreground hover:bg-pitch-foreground/10"
             >
               Semak Tempahan
             </Button>
