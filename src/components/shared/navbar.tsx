@@ -3,13 +3,21 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown, UserRound, Receipt, LogOut, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSession, useLogout } from "@/hooks/useAuth";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 const links = [
   { href: "/", label: "Laman Utama" },
   { href: "/facilities", label: "Kemudahan" },
+  { href: "/media", label: "Media" },
   { href: "/booking/lookup", label: "Semak Tempahan" },
 ];
 
@@ -20,29 +28,85 @@ function AuthArea({ onNavigate, mobile }: { onNavigate?: () => void; mobile?: bo
 
   if (isLoading) return null;
 
+  const firstName = session?.name.split(" ")[0];
+
+  function doLogout() {
+    logout.mutate(undefined, {
+      onSuccess: () => {
+        onNavigate?.();
+        router.push("/");
+        router.refresh();
+      },
+    });
+  }
+
   if (session) {
+    // Mobile: flat stacked links inside the sheet.
+    if (mobile) {
+      return (
+        <div className="flex flex-col gap-1">
+          <Link href="/profile" onClick={onNavigate} className="flex items-center gap-2.5 py-2 text-base font-semibold">
+            <UserRound className="h-4 w-4" aria-hidden /> Profil Saya
+          </Link>
+          <Link
+            href="/profile?tab=payments"
+            onClick={onNavigate}
+            className="flex items-center gap-2.5 py-2 text-base font-semibold"
+          >
+            <Receipt className="h-4 w-4" aria-hidden /> Sejarah Pembayaran
+          </Link>
+          {session.role === "ADMIN" && (
+            <Link href="/admin" onClick={onNavigate} className="flex items-center gap-2.5 py-2 text-base font-semibold">
+              <LayoutDashboard className="h-4 w-4" aria-hidden /> Panel Admin
+            </Link>
+          )}
+          <button
+            onClick={doLogout}
+            className="flex items-center gap-2.5 py-2 text-left text-base font-semibold text-destructive"
+          >
+            <LogOut className="h-4 w-4" aria-hidden /> Log Keluar
+          </button>
+        </div>
+      );
+    }
+
+    // Desktop: account dropdown.
     return (
-      <div className={mobile ? "flex flex-col gap-2" : "flex items-center gap-2"}>
-        {session.role === "ADMIN" && (
-          <Button render={<Link href="/admin" onClick={onNavigate} />} variant="outline">
-            Panel Admin
-          </Button>
-        )}
-        <Button
-          variant="ghost"
-          onClick={() => {
-            logout.mutate(undefined, {
-              onSuccess: () => {
-                onNavigate?.();
-                router.push("/");
-                router.refresh();
-              },
-            });
-          }}
-        >
-          Log Keluar ({session.name.split(" ")[0]})
-        </Button>
-      </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          render={
+            <button className="flex cursor-pointer items-center gap-2 rounded-full border border-border py-1.5 pl-1.5 pr-3 transition-colors hover:bg-muted">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                {firstName?.[0]?.toUpperCase()}
+              </span>
+              <span className="text-sm font-bold">{firstName}</span>
+              <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
+            </button>
+          }
+        />
+        <DropdownMenuContent align="end" className="w-56">
+          <div className="px-2 py-1.5">
+            <p className="text-sm font-bold">{session.name}</p>
+            <p className="truncate text-xs text-muted-foreground">{session.email}</p>
+          </div>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem render={<Link href="/profile" />}>
+            <UserRound className="h-4 w-4" aria-hidden /> Profil Saya
+          </DropdownMenuItem>
+          <DropdownMenuItem render={<Link href="/profile?tab=payments" />}>
+            <Receipt className="h-4 w-4" aria-hidden /> Sejarah Pembayaran
+          </DropdownMenuItem>
+          {session.role === "ADMIN" && (
+            <DropdownMenuItem render={<Link href="/admin" />}>
+              <LayoutDashboard className="h-4 w-4" aria-hidden /> Panel Admin
+            </DropdownMenuItem>
+          )}
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={doLogout} className="text-destructive">
+            <LogOut className="h-4 w-4" aria-hidden /> Log Keluar
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     );
   }
 
