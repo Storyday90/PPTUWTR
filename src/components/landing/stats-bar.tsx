@@ -15,14 +15,14 @@ export function StatsBar() {
   ];
 
   return (
-    <section className="border-t border-pitch-foreground/10 bg-pitch text-pitch-foreground" aria-label="Papan skor hari ini">
+    <section className="bg-pitch text-pitch-foreground" aria-label="Papan skor hari ini">
       <div className="mx-auto grid max-w-6xl grid-cols-2 divide-pitch-foreground/10 px-4 py-8 sm:px-6 md:grid-cols-4 md:divide-x">
         {items.map((item) => (
           <div key={item.label} className="px-4 py-3 text-center">
             {isLoading || item.value == null ? (
               <Skeleton className="mx-auto h-10 w-16 bg-pitch-foreground/10" />
             ) : (
-              <p className="font-heading text-6xl font-semibold leading-none text-accent">
+              <p className="font-heading text-6xl font-extrabold leading-none text-accent">
                 <CountUp value={item.value} />
               </p>
             )}

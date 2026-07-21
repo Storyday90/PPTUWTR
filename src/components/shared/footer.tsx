@@ -6,18 +6,18 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-2.5">
-            <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-md bg-accent font-heading text-lg font-semibold text-accent-foreground">
-              <span className="absolute inset-1 rounded-[3px] border border-black/20" aria-hidden />P
+            <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-accent font-heading text-lg font-extrabold text-accent-foreground">
+              P
             </span>
-            <span className="font-heading text-lg font-semibold tracking-tight">
-              PPUWTR <span className="accent-italic text-accent">Arena</span>
+            <span className="font-heading text-lg font-extrabold uppercase tracking-tight">
+              PPUWTR <span className="text-pitch-foreground/40">Club</span>
             </span>
           </div>
           <p className="mt-5 text-sm leading-relaxed text-pitch-foreground/60">
             Persatuan Penduduk Taman Universiti Wallagonia Tapah Road. Platform tempahan rasmi untuk Dewan Dato&apos;
             Haji Samsudin bin Haji Abu Hassan.
           </p>
-          <p className="mt-5 font-heading text-lg italic text-accent">Book. Play. Connect.</p>
+          <p className="display mt-6 text-xl accent-lime">Book. Play. Connect.</p>
         </div>
 
         <div>

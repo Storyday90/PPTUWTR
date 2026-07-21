@@ -102,10 +102,8 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
         <div className="border-b border-border bg-card">
           <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-4 px-4 py-6 sm:px-6">
             <div>
-              <p className="eyebrow text-accent">{court.sport.name}</p>
-              <h1 className="mt-2 font-heading text-3xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-4xl">
-                {court.name}
-              </h1>
+              <p className="eyebrow text-foreground/50">{court.sport.name}</p>
+              <h1 className="display mt-2 text-3xl sm:text-4xl">{court.name}</h1>
             </div>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1.5">
@@ -126,7 +124,7 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <CalendarDays className="h-5 w-5 text-primary" aria-hidden />
-                    <h2 className="font-heading text-2xl font-semibold">Kalendar Tempahan</h2>
+                    <h2 className="display text-2xl">Kalendar Tempahan</h2>
                   </div>
                   <div className="flex items-center gap-2">
                     <Button
@@ -169,7 +167,7 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
             {step === "contact" && (
               <Card>
                 <CardContent className="p-5">
-                  <h2 className="mb-4 font-heading text-2xl font-semibold">Butiran Hubungan</h2>
+                  <h2 className="mb-4 display text-2xl">Butiran Hubungan</h2>
                   <ContactForm onSubmit={handleContactSubmit} submitting={createHold.isPending} />
                 </CardContent>
               </Card>
@@ -194,7 +192,7 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
           <aside>
             <Card className="sticky top-20">
               <CardContent className="space-y-3 p-5">
-                <h2 className="font-heading text-xl font-semibold">Ringkasan Tempahan</h2>
+                <h2 className="display text-xl">Ringkasan Tempahan</h2>
                 {selected.length === 0 ? (
                   <p className="text-sm text-muted-foreground">
                     Belum ada slot dipilih. Klik slot <span className="font-medium text-success">kosong</span> pada
@@ -212,11 +210,11 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
                 )}
                 <div className="flex items-center justify-between border-t border-border pt-3">
                   <span className="text-sm text-muted-foreground">Jumlah</span>
-                  <span className="font-heading text-2xl font-bold text-primary">{centsToRM(totalPriceCents)}</span>
+                  <span className="font-heading text-2xl font-extrabold text-foreground">{centsToRM(totalPriceCents)}</span>
                 </div>
                 {step === "select" && (
                   <Button
-                    className="w-full bg-accent font-semibold text-accent-foreground hover:bg-accent/90"
+                    className="w-full rounded-full bg-accent font-bold uppercase tracking-wide text-accent-foreground hover:bg-accent/90"
                     disabled={selected.length === 0}
                     onClick={() => setStep("contact")}
                   >
@@ -224,7 +222,7 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
                   </Button>
                 )}
                 {step === "contact" && (
-                  <Button variant="outline" className="w-full" onClick={() => setStep("select")}>
+                  <Button variant="outline" className="w-full rounded-full font-bold uppercase tracking-wide" onClick={() => setStep("select")}>
                     Kembali ke Kalendar
                   </Button>
                 )}

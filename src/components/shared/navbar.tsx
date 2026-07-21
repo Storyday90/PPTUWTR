@@ -48,12 +48,16 @@ function AuthArea({ onNavigate, mobile }: { onNavigate?: () => void; mobile?: bo
 
   return (
     <div className={mobile ? "flex flex-col gap-2" : "flex items-center gap-2"}>
-      <Button render={<Link href="/login" onClick={onNavigate} />} variant={mobile ? "outline" : "ghost"}>
+      <Button
+        render={<Link href="/login" onClick={onNavigate} />}
+        variant={mobile ? "outline" : "ghost"}
+        className="rounded-full font-bold uppercase tracking-wide"
+      >
         Log Masuk
       </Button>
       <Button
         render={<Link href="/facilities" onClick={onNavigate} />}
-        className="bg-accent font-semibold tracking-tight text-accent-foreground hover:bg-accent/90"
+        className="rounded-full bg-accent px-5 font-bold uppercase tracking-wide text-accent-foreground hover:bg-accent/90"
       >
         Tempah Sekarang
       </Button>
@@ -68,11 +72,11 @@ export function Navbar() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2.5">
-          <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-md bg-primary font-heading text-lg font-semibold text-primary-foreground">
-            <span className="absolute inset-1 rounded-[3px] border border-accent/40" aria-hidden />P
+          <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-accent font-heading text-lg font-extrabold text-accent-foreground">
+            P
           </span>
-          <span className="font-heading text-xl font-semibold leading-none tracking-tight text-foreground">
-            PPUWTR <span className="accent-italic text-accent">Arena</span>
+          <span className="font-heading text-xl font-extrabold uppercase leading-none tracking-tight text-foreground">
+            PPUWTR <span className="text-foreground/40">Club</span>
           </span>
         </Link>
 
@@ -81,7 +85,7 @@ export function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-foreground/70 transition-colors hover:text-accent"
+              className="text-sm font-bold uppercase tracking-wide text-foreground/60 transition-colors hover:text-foreground"
             >
               {l.label}
             </Link>

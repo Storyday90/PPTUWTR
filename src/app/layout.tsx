@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Archivo } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
@@ -11,11 +11,10 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
+  weight: ["500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ms" className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
+    <html lang="ms" className={`${inter.variable} ${archivo.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans text-base">
         <QueryProvider>
           <SmoothScroll />

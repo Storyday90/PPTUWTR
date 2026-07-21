@@ -13,7 +13,7 @@ export function CourtCard({ court }: { court: CourtDTO }) {
   const img = sportImage(court.sport.slug);
 
   return (
-    <Card className="gap-0 overflow-hidden py-0 transition-shadow hover:shadow-lg">
+    <Card className="gap-0 overflow-hidden rounded-3xl py-0 transition-shadow hover:shadow-xl">
       <div className="relative h-40 overflow-hidden">
         <Image
           src={img.src}
@@ -27,8 +27,8 @@ export function CourtCard({ court }: { court: CourtDTO }) {
       </div>
       <CardContent className="space-y-3 p-5">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-heading text-2xl font-semibold leading-tight">{court.name}</h3>
-          <p className="whitespace-nowrap font-heading text-xl font-semibold text-foreground">
+          <h3 className="display text-2xl leading-tight">{court.name}</h3>
+          <p className="whitespace-nowrap font-heading text-xl font-extrabold text-foreground">
             {centsToRM(court.hourlyPriceCents)}
             <span className="text-xs font-normal text-muted-foreground">/jam</span>
           </p>
@@ -53,7 +53,7 @@ export function CourtCard({ court }: { court: CourtDTO }) {
 
         <Button
           render={<Link href={`/book/${court.id}`} />}
-          className="w-full bg-primary font-semibold hover:bg-primary/90"
+          className="w-full rounded-full bg-primary font-bold uppercase tracking-wide hover:bg-primary/90"
         >
           Lihat Kalendar &amp; Tempah
         </Button>

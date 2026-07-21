@@ -6,7 +6,7 @@ export function AboutDewan() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-28">
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-        <Parallax className="relative order-last aspect-[4/5] overflow-hidden rounded-xl lg:order-first" speed={0.1}>
+        <Parallax className="relative order-last aspect-[4/5] overflow-hidden rounded-3xl lg:order-first" speed={0.1}>
           <Image
             src="/images/badminton-rackets.jpg"
             alt="Raket badminton dan bulu tangkis di atas gelanggang hijau"
@@ -17,10 +17,9 @@ export function AboutDewan() {
         </Parallax>
 
         <Reveal>
-          <p className="eyebrow text-accent">Tentang Dewan</p>
-          <h2 className="mt-4 font-heading text-4xl font-semibold leading-[1.04] tracking-[-0.02em] sm:text-6xl">
-            Lebih daripada gelanggang —{" "}
-            <span className="accent-italic text-accent">ini ruang komuniti.</span>
+          <p className="eyebrow text-foreground/50">Tentang Dewan</p>
+          <h2 className="display mt-4 text-4xl sm:text-6xl">
+            Lebih daripada gelanggang — <span className="accent-lime">ini ruang komuniti.</span>
           </h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground">
             <p>

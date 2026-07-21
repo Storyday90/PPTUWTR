@@ -37,13 +37,13 @@ const TESTIMONIALS = [
 
 function TestimonialCard({ quote, name, context }: (typeof TESTIMONIALS)[number]) {
   return (
-    <figure className="w-80 shrink-0 rounded-lg border border-border bg-card p-6">
-      <Quote className="h-5 w-5 text-accent" aria-hidden />
-      <blockquote className="mt-4 font-heading text-lg font-normal italic leading-relaxed text-foreground">
-        &ldquo;{quote}&rdquo;
-      </blockquote>
+    <figure className="w-80 shrink-0 rounded-2xl border border-border bg-card p-6">
+      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-accent-foreground">
+        <Quote className="h-4 w-4" aria-hidden />
+      </span>
+      <blockquote className="mt-4 text-base leading-relaxed text-foreground">{quote}</blockquote>
       <figcaption className="mt-5 flex items-baseline gap-2">
-        <span className="text-sm font-semibold text-foreground">{name}</span>
+        <span className="text-sm font-bold uppercase tracking-wide text-foreground">{name}</span>
         <span className="text-xs text-muted-foreground">· {context}</span>
       </figcaption>
     </figure>
@@ -58,9 +58,9 @@ export function Testimonials() {
   return (
     <section className="overflow-hidden border-t border-border py-24 sm:py-28">
       <Reveal className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className="eyebrow text-accent">Suara Komuniti</p>
-        <h2 className="mt-3 font-heading text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl">
-          Mereka dah cuba
+        <p className="eyebrow text-foreground/50">Suara Komuniti</p>
+        <h2 className="display mt-3 text-4xl sm:text-5xl">
+          Mereka dah <span className="accent-lime">cuba</span>
         </h2>
       </Reveal>
 

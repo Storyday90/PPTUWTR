@@ -34,16 +34,16 @@ export function FAQ() {
   return (
     <section id="faq" className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-28">
       <Reveal>
-        <p className="eyebrow text-center text-accent">Soalan Lazim</p>
-        <h2 className="mt-3 text-center font-heading text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl">
-          Ada pertanyaan?
+        <p className="eyebrow text-center text-foreground/50">Soalan Lazim</p>
+        <h2 className="display mt-3 text-center text-4xl sm:text-5xl">
+          Ada <span className="accent-lime">pertanyaan?</span>
         </h2>
       </Reveal>
       <Reveal stagger={0.07} className="mt-10 space-y-3">
         {FAQS.map((item, i) => (
-          <div key={item.q} className="overflow-hidden rounded-xl border border-border bg-card">
+          <div key={item.q} className="overflow-hidden rounded-2xl border border-border bg-card">
             <button
-              className="flex w-full cursor-pointer items-center justify-between gap-4 p-4 text-left font-semibold"
+              className="flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left font-bold"
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
               aria-expanded={openIndex === i}
             >
@@ -53,7 +53,7 @@ export function FAQ() {
                 aria-hidden
               />
             </button>
-            {openIndex === i && <p className="px-4 pb-4 text-sm leading-relaxed text-muted-foreground">{item.a}</p>}
+            {openIndex === i && <p className="px-5 pb-5 text-sm leading-relaxed text-muted-foreground">{item.a}</p>}
           </div>
         ))}
       </Reveal>
