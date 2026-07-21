@@ -37,7 +37,7 @@ export default function AdminBookingsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="font-heading text-2xl font-bold">Pengurusan Tempahan</h1>
+      <h1 className="display text-3xl">Pengurusan Tempahan</h1>
 
       <Tabs value={status} onValueChange={setStatus}>
         <TabsList className="flex h-auto flex-wrap justify-start gap-1 bg-transparent p-0">

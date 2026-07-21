@@ -48,7 +48,7 @@ export default function AdminBlockedSlotsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="font-heading text-2xl font-bold">Slot Ditutup / Penyelenggaraan</h1>
+      <h1 className="display text-3xl">Slot Ditutup / Penyelenggaraan</h1>
 
       <Card>
         <CardContent className="p-5">

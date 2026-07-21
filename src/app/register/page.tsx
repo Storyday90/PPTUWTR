@@ -36,11 +36,14 @@ export default function RegisterPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 bg-secondary/30">
+      <main className="flex-1 bg-secondary/40">
         <div className="mx-auto max-w-md px-4 py-16 sm:px-6">
-          <Card>
-            <CardContent className="space-y-4 p-8">
-              <h1 className="text-center font-heading text-xl font-bold">Daftar Akaun</h1>
+          <Card className="rounded-3xl">
+            <CardContent className="space-y-5 p-8">
+              <div className="text-center">
+                <p className="eyebrow text-foreground/50">PPUWTR Club</p>
+                <h1 className="display mt-2 text-3xl">Daftar Akaun</h1>
+              </div>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                 <div className="space-y-1.5">
                   <Label htmlFor="name">Nama Penuh</Label>
@@ -64,14 +67,14 @@ export default function RegisterPage() {
                 <Button
                   type="submit"
                   disabled={registerUser.isPending}
-                  className="w-full bg-primary hover:bg-primary/90"
+                  className="w-full rounded-full bg-primary font-bold uppercase tracking-wide hover:bg-primary/90"
                 >
                   {registerUser.isPending ? "Memproses…" : "Daftar"}
                 </Button>
               </form>
               <p className="text-center text-sm text-muted-foreground">
                 Sudah ada akaun?{" "}
-                <Link href="/login" className="font-medium text-primary hover:underline">
+                <Link href="/login" className="font-bold text-foreground underline-offset-4 hover:underline">
                   Log Masuk
                 </Link>
               </p>

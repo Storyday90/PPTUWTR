@@ -52,7 +52,7 @@ export default function AdminCourtsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="font-heading text-2xl font-bold">Pengurusan Gelanggang</h1>
+        <h1 className="display text-3xl">Pengurusan Gelanggang</h1>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger render={<Button className="bg-primary hover:bg-primary/90" />}>
             Tambah Gelanggang

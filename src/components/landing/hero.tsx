@@ -3,11 +3,12 @@
 import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { CalendarDays, MapPin, Clock, LayoutGrid } from "lucide-react";
+import { CalendarDays, MapPin, Clock, LayoutGrid, ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Button } from "@/components/ui/button";
+import { CountUp } from "@/components/motion/count-up";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -108,7 +109,7 @@ export function Hero() {
               <LayoutGrid className="h-5 w-5" aria-hidden />
             </span>
             <span className="text-sm font-bold uppercase leading-tight tracking-wide">
-              5 jenis kemudahan
+              <span className="text-accent"><CountUp value={5} /></span> jenis kemudahan
               <br />
               <span className="font-medium text-court-foreground/60">satu dewan komuniti</span>
             </span>
@@ -123,6 +124,11 @@ export function Hero() {
               <span className="font-medium text-court-foreground/60">tujuh hari seminggu</span>
             </span>
           </div>
+        </div>
+
+        <div className="scroll-cue pointer-events-none absolute inset-x-0 bottom-6 flex flex-col items-center gap-1.5 text-court-foreground/60">
+          <span className="eyebrow text-[0.65rem]">Scroll</span>
+          <ChevronDown className="h-4 w-4 animate-bounce text-accent" aria-hidden />
         </div>
       </div>
     </section>

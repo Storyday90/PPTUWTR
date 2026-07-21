@@ -13,7 +13,7 @@ export default function AdminOverviewPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="font-heading text-2xl font-bold">Gambaran Keseluruhan</h1>
+      <h1 className="display text-3xl">Gambaran Keseluruhan</h1>
 
       {isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

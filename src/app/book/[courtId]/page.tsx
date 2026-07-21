@@ -2,13 +2,15 @@
 
 import { use, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addWeeks, format, isBefore, startOfDay, startOfWeek } from "date-fns";
+import { addMonths, addWeeks, format, isBefore, startOfDay, startOfMonth, startOfWeek } from "date-fns";
 import { ms } from "date-fns/locale";
 import { CalendarDays, ChevronLeft, ChevronRight, Users } from "lucide-react";
 import { toast } from "sonner";
 import { useCourt } from "@/hooks/useFacilities";
 import { useCreateHold } from "@/hooks/useCreateHold";
 import { WeekCalendar } from "@/components/booking/week-calendar";
+import { MonthCalendar } from "@/components/booking/month-calendar";
+import { cn } from "@/lib/utils";
 import { StatusLegend } from "@/components/booking/status-legend";
 import { ContactForm } from "@/components/booking/contact-form";
 import { HoldCountdown } from "@/components/booking/hold-countdown";
@@ -29,12 +31,21 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
   const createHold = useCreateHold(courtId);
 
   const currentWeekStart = useMemo(() => startOfWeek(startOfDay(new Date()), { weekStartsOn: 1 }), []);
+  const currentMonthStart = useMemo(() => startOfMonth(startOfDay(new Date())), []);
+  const [view, setView] = useState<"week" | "month">("week");
   const [weekStart, setWeekStart] = useState(currentWeekStart);
+  const [monthStart, setMonthStart] = useState(currentMonthStart);
   const [selected, setSelected] = useState<string[]>([]);
   const [step, setStep] = useState<Step>("select");
   const [holdBooking, setHoldBooking] = useState<{ id: string; code: string; holdExpiresAt: string } | null>(null);
 
   const isCurrentWeek = !isBefore(currentWeekStart, weekStart) && !isBefore(weekStart, currentWeekStart);
+  const isCurrentMonth = !isBefore(currentMonthStart, monthStart) && !isBefore(monthStart, currentMonthStart);
+
+  function handleSelectDay(day: Date) {
+    setWeekStart(startOfWeek(startOfDay(day), { weekStartsOn: 1 }));
+    setView("week");
+  }
 
   const totalPriceCents = useMemo(() => {
     if (!court) return 0;
@@ -94,6 +105,7 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
   }
 
   const weekLabel = `${format(weekStart, "d MMM", { locale: ms })} – ${format(addWeeks(weekStart, 1), "d MMM yyyy", { locale: ms })}`;
+  const monthLabel = format(monthStart, "MMMM yyyy", { locale: ms });
 
   return (
     <>
@@ -126,41 +138,91 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
                     <CalendarDays className="h-5 w-5 text-primary" aria-hidden />
                     <h2 className="display text-2xl">Kalendar Tempahan</h2>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      disabled={isCurrentWeek}
-                      onClick={() => setWeekStart((w) => addWeeks(w, -1))}
-                      aria-label="Minggu sebelumnya"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                    </Button>
-                    <span className="min-w-40 text-center font-heading text-sm font-semibold">{weekLabel}</span>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      onClick={() => setWeekStart((w) => addWeeks(w, 1))}
-                      aria-label="Minggu seterusnya"
-                    >
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                    {!isCurrentWeek && (
-                      <Button variant="ghost" size="sm" onClick={() => setWeekStart(currentWeekStart)}>
-                        Minggu Ini
-                      </Button>
-                    )}
+                  <div className="inline-flex rounded-full border border-border bg-muted p-1">
+                    {(["week", "month"] as const).map((v) => (
+                      <button
+                        key={v}
+                        type="button"
+                        onClick={() => setView(v)}
+                        className={cn(
+                          "cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide transition-colors",
+                          view === v ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+                        )}
+                      >
+                        {v === "week" ? "Minggu" : "Bulan"}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
-                <StatusLegend />
+                <div className="flex items-center justify-center gap-2 sm:justify-end">
+                  {view === "week" ? (
+                    <>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        disabled={isCurrentWeek}
+                        onClick={() => setWeekStart((w) => addWeeks(w, -1))}
+                        aria-label="Minggu sebelumnya"
+                      >
+                        <ChevronLeft className="h-4 w-4" />
+                      </Button>
+                      <span className="min-w-44 text-center font-heading text-sm font-bold">{weekLabel}</span>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => setWeekStart((w) => addWeeks(w, 1))}
+                        aria-label="Minggu seterusnya"
+                      >
+                        <ChevronRight className="h-4 w-4" />
+                      </Button>
+                      {!isCurrentWeek && (
+                        <Button variant="ghost" size="sm" className="rounded-full font-bold uppercase tracking-wide" onClick={() => setWeekStart(currentWeekStart)}>
+                          Minggu Ini
+                        </Button>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        disabled={isCurrentMonth}
+                        onClick={() => setMonthStart((m) => addMonths(m, -1))}
+                        aria-label="Bulan sebelumnya"
+                      >
+                        <ChevronLeft className="h-4 w-4" />
+                      </Button>
+                      <span className="min-w-44 text-center font-heading text-sm font-bold capitalize">{monthLabel}</span>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => setMonthStart((m) => addMonths(m, 1))}
+                        aria-label="Bulan seterusnya"
+                      >
+                        <ChevronRight className="h-4 w-4" />
+                      </Button>
+                      {!isCurrentMonth && (
+                        <Button variant="ghost" size="sm" className="rounded-full font-bold uppercase tracking-wide" onClick={() => setMonthStart(currentMonthStart)}>
+                          Bulan Ini
+                        </Button>
+                      )}
+                    </>
+                  )}
+                </div>
 
-                <WeekCalendar courtId={courtId} weekStart={weekStart} selected={selected} onToggle={toggleSlot} />
-
-                <p className="text-xs text-muted-foreground">
-                  Slot berwarna <span className="font-semibold text-destructive">merah</span> telah penuh. Pilih slot
-                  kosong — sistem kami menjamin tiada pertindihan tempahan.
-                </p>
+                {view === "week" ? (
+                  <>
+                    <StatusLegend />
+                    <WeekCalendar courtId={courtId} weekStart={weekStart} selected={selected} onToggle={toggleSlot} />
+                    <p className="text-xs text-muted-foreground">
+                      Slot berwarna <span className="font-semibold text-destructive">merah</span> telah penuh. Pilih
+                      slot kosong — sistem kami menjamin tiada pertindihan tempahan.
+                    </p>
+                  </>
+                ) : (
+                  <MonthCalendar courtId={courtId} monthStart={monthStart} onSelectDay={handleSelectDay} />
+                )}
               </div>
             )}
 

@@ -46,11 +46,14 @@ function LoginForm() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 bg-secondary/30">
+      <main className="flex-1 bg-secondary/40">
         <div className="mx-auto max-w-md px-4 py-16 sm:px-6">
-          <Card>
-            <CardContent className="space-y-4 p-8">
-              <h1 className="text-center font-heading text-xl font-bold">Log Masuk</h1>
+          <Card className="rounded-3xl">
+            <CardContent className="space-y-5 p-8">
+              <div className="text-center">
+                <p className="eyebrow text-foreground/50">PPUWTR Club</p>
+                <h1 className="display mt-2 text-3xl">Log Masuk</h1>
+              </div>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                 <div className="space-y-1.5">
                   <Label htmlFor="email">Emel</Label>
@@ -62,13 +65,17 @@ function LoginForm() {
                   <Input id="password" type="password" {...register("password")} />
                   {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
                 </div>
-                <Button type="submit" disabled={login.isPending} className="w-full bg-primary hover:bg-primary/90">
+                <Button
+                  type="submit"
+                  disabled={login.isPending}
+                  className="w-full rounded-full bg-primary font-bold uppercase tracking-wide hover:bg-primary/90"
+                >
                   {login.isPending ? "Memproses…" : "Log Masuk"}
                 </Button>
               </form>
               <p className="text-center text-sm text-muted-foreground">
                 Belum ada akaun?{" "}
-                <Link href="/register" className="font-medium text-primary hover:underline">
+                <Link href="/register" className="font-bold text-foreground underline-offset-4 hover:underline">
                   Daftar
                 </Link>
               </p>
