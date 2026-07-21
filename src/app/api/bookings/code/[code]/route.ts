@@ -20,8 +20,17 @@ export async function GET(_req: Request, { params }: { params: Promise<{ code: s
         endAt: booking.endAt,
         totalPriceCents: booking.totalPriceCents,
         contactName: booking.contactName,
+        courtId: booking.courtId,
         court: { name: booking.court.name, sport: booking.court.sport.name },
-        payment: booking.payment ? { status: booking.payment.status } : null,
+        payment: booking.payment
+          ? {
+              status: booking.payment.status,
+              provider: booking.payment.provider,
+              providerRef: booking.payment.providerRef,
+              submittedAt: booking.payment.submittedAt,
+              paidAt: booking.payment.paidAt,
+            }
+          : null,
       },
     });
   } catch (err) {

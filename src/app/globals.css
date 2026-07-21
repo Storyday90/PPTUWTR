@@ -209,6 +209,22 @@
     text-wrap: balance;
   }
 
+  /* Receipt print / save-as-PDF: strip the app chrome, isolate the receipt */
+  @media print {
+    header,
+    footer,
+    .no-print {
+      display: none !important;
+    }
+    body {
+      background: #ffffff !important;
+    }
+    #receipt {
+      box-shadow: none !important;
+      border: none !important;
+    }
+  }
+
   /* Looping editorial ticker */
   .animate-ticker {
     animation: ticker 30s linear infinite;

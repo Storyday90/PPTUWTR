@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Menu, X, ChevronDown, UserRound, Receipt, LogOut, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSession, useLogout } from "@/hooks/useAuth";
+import { NotificationBell } from "@/components/shared/notification-bell";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -70,8 +71,10 @@ function AuthArea({ onNavigate, mobile }: { onNavigate?: () => void; mobile?: bo
       );
     }
 
-    // Desktop: account dropdown.
+    // Desktop: notification bell + account dropdown.
     return (
+      <div className="flex items-center gap-2">
+        <NotificationBell isAdmin={session.role === "ADMIN"} />
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
@@ -107,6 +110,7 @@ function AuthArea({ onNavigate, mobile }: { onNavigate?: () => void; mobile?: bo
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      </div>
     );
   }
 

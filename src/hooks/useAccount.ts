@@ -19,6 +19,7 @@ export interface AccountBooking {
   startAt: string;
   endAt: string;
   totalPriceCents: number;
+  courtId: string;
   court: { name: string; sport: string };
   payment: {
     status: string;

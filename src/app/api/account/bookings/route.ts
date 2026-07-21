@@ -29,6 +29,7 @@ export async function GET() {
         startAt: b.startAt,
         endAt: b.endAt,
         totalPriceCents: b.totalPriceCents,
+        courtId: b.courtId,
         court: { name: b.court.name, sport: b.court.sport.name },
         payment: b.payment
           ? {

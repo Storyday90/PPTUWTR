@@ -98,6 +98,7 @@ model Court {
   bookingSlots     BookingSlot[]
   blockedSlots     BlockedSlot[]
   bookings         Booking[]
+  reviews          Review[]
 
   @@index([facilityId])
   @@index([sportId])
@@ -150,10 +151,11 @@ model Payment {
   id          String    @id @default(cuid())
   bookingId   String    @unique
   booking     Booking   @relation(fields: [bookingId], references: [id])
-  provider    String    @default("STUB")
-  providerRef String?
+  provider    String    @default("QR") // QR | STUB | ...
+  providerRef String? // client-entered payment reference / transaction id
   amountCents Int
-  status      String    @default("PENDING") // PENDING | PAID | FAILED | REFUNDED
+  status      String    @default("PENDING") // PENDING | SUBMITTED | PAID | FAILED | REFUNDED
+  submittedAt DateTime? // when the client marked "I've paid" (awaiting admin verification)
   paidAt      DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -165,11 +167,28 @@ model Notification {
   booking     Booking?  @relation(fields: [bookingId], references: [id])
   userId      String?
   user        User?     @relation(fields: [userId], references: [id])
-  channel     String // EMAIL | WHATSAPP | SMS
-  type        String // BOOKING_HELD | BOOKING_CONFIRMED | BOOKING_CANCELLED | PAYMENT_RECEIVED
-  payloadJson String?
+  channel     String // INAPP | EMAIL | WHATSAPP | SMS
+  type        String // PAYMENT_SUBMITTED | PAYMENT_CONFIRMED | BOOKING_CONFIRMED | ...
+  payloadJson String? // { title, body, ... } for INAPP; { to, subject, body } for EMAIL
   status      String    @default("QUEUED") // QUEUED | SENT | FAILED
+  readAt      DateTime? // in-app read state (null = unread)
   createdAt   DateTime  @default(now())
+
+  @@index([userId, readAt])
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  courtId    String
+  court      Court    @relation(fields: [courtId], references: [id])
+  userId     String?
+  bookingId  String?
+  authorName String
+  rating     Int // 1..5
+  comment    String?
+  createdAt  DateTime @default(now())
+
+  @@index([courtId])
 }
 
 model BlockedSlot {

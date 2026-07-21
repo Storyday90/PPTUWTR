@@ -28,6 +28,7 @@ interface AdminBooking {
   startAt: string;
   totalPriceCents: number;
   court: { name: string; sport: string };
+  payment: { status: string } | null;
 }
 
 export default function AdminBookingsPage() {
@@ -74,6 +75,11 @@ export default function AdminBookingsPage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="font-medium">{centsToRM(b.totalPriceCents)}</span>
+                    {b.payment?.status === "SUBMITTED" && b.status === "PENDING_PAYMENT" && (
+                      <Badge variant="outline" className="border-blue-300 bg-blue-50 text-blue-700">
+                        Klien dah bayar
+                      </Badge>
+                    )}
                     <Badge variant="outline" className={BOOKING_STATUS_META[b.status]?.badgeClass}>
                       {BOOKING_STATUS_META[b.status]?.label ?? b.status}
                     </Badge>
@@ -85,11 +91,14 @@ export default function AdminBookingsPage() {
                         onClick={() =>
                           action.mutate(
                             { id: b.id, action: "approve" },
-                            { onError: (e: Error) => toast.error(e.message) },
+                            {
+                              onSuccess: () => toast.success("Bayaran disahkan · emel resit dihantar kepada klien."),
+                              onError: (e: Error) => toast.error(e.message),
+                            },
                           )
                         }
                       >
-                        Luluskan
+                        {b.payment?.status === "SUBMITTED" ? "Sahkan Bayaran" : "Luluskan"}
                       </Button>
                     )}
                     {(b.status === "PENDING_PAYMENT" || b.status === "CONFIRMED") && (

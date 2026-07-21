@@ -10,10 +10,11 @@ import { useCourt } from "@/hooks/useFacilities";
 import { useCreateHold } from "@/hooks/useCreateHold";
 import { WeekCalendar } from "@/components/booking/week-calendar";
 import { MonthCalendar } from "@/components/booking/month-calendar";
+import { QrPayment } from "@/components/booking/qr-payment";
+import { CourtReviews } from "@/components/reviews/court-reviews";
 import { cn } from "@/lib/utils";
 import { StatusLegend } from "@/components/booking/status-legend";
 import { ContactForm } from "@/components/booking/contact-form";
-import { HoldCountdown } from "@/components/booking/hold-countdown";
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "@/components/shared/footer";
 import { Button } from "@/components/ui/button";
@@ -242,11 +243,11 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
             )}
 
             {step === "hold" && holdBooking && (
-              <HoldCountdown
+              <QrPayment
                 bookingId={holdBooking.id}
                 holdExpiresAt={holdBooking.holdExpiresAt}
                 totalPriceCents={totalPriceCents}
-                onConfirmed={() => router.push(`/booking/${holdBooking.code}`)}
+                onSubmitted={() => router.push(`/booking/${holdBooking.code}`)}
                 onExpired={() => {
                   toast.error("Tempahan anda telah tamat tempoh, sila cuba semula.");
                   setSelected([]);
@@ -297,6 +298,10 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
               </CardContent>
             </Card>
           </aside>
+        </div>
+
+        <div className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
+          <CourtReviews courtId={courtId} />
         </div>
       </main>
       <Footer />

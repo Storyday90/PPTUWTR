@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { format } from "date-fns";
 import { ms } from "date-fns/locale";
-import { Receipt, ArrowRight } from "lucide-react";
+import { Receipt, ArrowRight, RotateCcw } from "lucide-react";
 import { useMyBookings, type AccountBooking } from "@/hooks/useAccount";
 import { centsToRM } from "@/lib/utils/money";
 import { BOOKING_STATUS_META } from "@/lib/booking/bookingStatusMeta";
@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 
 const PAYMENT_STATUS_META: Record<string, { label: string; className: string }> = {
   PAID: { label: "Dibayar", className: "bg-success/10 text-success border-success/30" },
+  SUBMITTED: { label: "Menunggu Pengesahan", className: "bg-blue-50 text-blue-700 border-blue-300" },
   PENDING: { label: "Belum Dibayar", className: "bg-amber-50 text-amber-700 border-amber-300" },
   FAILED: { label: "Gagal", className: "bg-destructive/10 text-destructive border-destructive/30" },
   REFUNDED: { label: "Dikembalikan", className: "bg-slate-100 text-slate-600 border-slate-300" },
@@ -32,39 +33,46 @@ function BookingRow({ b }: { b: AccountBooking }) {
   const bookingMeta = BOOKING_STATUS_META[b.status];
 
   return (
-    <Link
-      href={`/booking/${b.code}`}
-      className="group flex flex-col gap-3 rounded-2xl border border-border bg-card p-4 transition-colors hover:border-foreground/20 sm:flex-row sm:items-center sm:justify-between sm:p-5"
-    >
-      <div className="min-w-0">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="font-mono text-sm font-bold">{b.code}</span>
-          {bookingMeta && (
-            <Badge variant="outline" className={cn("text-[10px]", bookingMeta.badgeClass)}>
-              {bookingMeta.label}
-            </Badge>
+    <div className="rounded-2xl border border-border bg-card p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-mono text-sm font-bold">{b.code}</span>
+            {bookingMeta && (
+              <Badge variant="outline" className={cn("text-[10px]", bookingMeta.badgeClass)}>
+                {bookingMeta.label}
+              </Badge>
+            )}
+          </div>
+          <p className="mt-1 text-sm font-semibold text-foreground">
+            {b.court.name} · <span className="text-muted-foreground">{b.court.sport}</span>
+          </p>
+          <p className="text-xs text-muted-foreground">
+            {format(new Date(b.startAt), "EEEE, d MMM yyyy · HH:mm", { locale: ms })}–
+            {format(new Date(b.endAt), "HH:mm")}
+          </p>
+          {b.payment?.paidAt && (
+            <p className="text-xs text-muted-foreground">
+              Dibayar pada {format(new Date(b.payment.paidAt), "d MMM yyyy, HH:mm", { locale: ms })}
+            </p>
           )}
         </div>
-        <p className="mt-1 text-sm font-semibold text-foreground">
-          {b.court.name} · <span className="text-muted-foreground">{b.court.sport}</span>
-        </p>
-        <p className="text-xs text-muted-foreground">
-          {format(new Date(b.startAt), "EEEE, d MMM yyyy · HH:mm", { locale: ms })}–
-          {format(new Date(b.endAt), "HH:mm")}
-        </p>
-        {b.payment?.paidAt && (
-          <p className="text-xs text-muted-foreground">
-            Dibayar pada {format(new Date(b.payment.paidAt), "d MMM yyyy, HH:mm", { locale: ms })}
-          </p>
-        )}
+        <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-center">
+          <span className="font-heading text-lg font-extrabold">{centsToRM(b.totalPriceCents)}</span>
+          <Badge variant="outline" className={cn("text-[11px]", pay.className)}>
+            {pay.label}
+          </Badge>
+        </div>
       </div>
-      <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-center">
-        <span className="font-heading text-lg font-extrabold">{centsToRM(b.totalPriceCents)}</span>
-        <Badge variant="outline" className={cn("text-[11px]", pay.className)}>
-          {pay.label}
-        </Badge>
+      <div className="mt-3 flex items-center gap-4 border-t border-border pt-3 text-xs font-bold uppercase tracking-wide">
+        <Link href={`/booking/${b.code}`} className="flex items-center gap-1 text-foreground/70 hover:text-foreground">
+          Lihat Resit <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+        </Link>
+        <Link href={`/book/${b.courtId}`} className="flex items-center gap-1 text-accent-foreground/80 hover:text-foreground">
+          <RotateCcw className="h-3.5 w-3.5" aria-hidden /> Tempah Lagi
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 }
 
