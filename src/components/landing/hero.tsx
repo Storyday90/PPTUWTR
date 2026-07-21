@@ -52,8 +52,8 @@ export function Hero() {
     <section ref={sectionRef} className="relative overflow-hidden bg-court text-court-foreground">
       <div className="hero-img-wrap absolute inset-0">
         <Image
-          src="/images/dewan-hero.jpg"
-          alt="Gelanggang di Dewan Dato' Haji Samsudin bin Haji Abu Hassan"
+          src="/images/hall-hero.jpg"
+          alt="Gelanggang badminton di dalam dewan Dato' Haji Samsudin bin Haji Abu Hassan"
           fill
           priority
           sizes="100vw"

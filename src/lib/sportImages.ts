@@ -1,19 +1,19 @@
 export const SPORT_IMAGES: Record<string, { src: string; alt: string }> = {
   badminton: {
-    src: "/images/badminton-player.jpg",
-    alt: "Pemain badminton beraksi di atas gelanggang dalam dewan",
+    src: "/images/badminton-hd.jpg",
+    alt: "Raket badminton di atas gelanggang berwarna",
   },
   pickleball: {
-    src: "/images/pickleball-player.jpg",
-    alt: "Pemain pickleball memukul bola di gelanggang tertutup",
+    src: "/images/pickleball-hd.jpg",
+    alt: "Bet pickleball dan bola di atas gelanggang hijau",
   },
   futsal: {
-    src: "/images/futsal-match.jpg",
-    alt: "Perlawanan futsal rancak di gelanggang dalam dewan",
+    src: "/images/futsal-hd.jpg",
+    alt: "Bola futsal di depan gol di gelanggang dalam dewan",
   },
   "ping-pong": {
-    src: "/images/ping-pong.jpg",
-    alt: "Bet ping pong merah dan bola di atas meja",
+    src: "/images/ping-pong-hd.jpg",
+    alt: "Bet ping pong merah dan bola di atas meja biru",
   },
   "dewan-seminar": {
     src: "/images/seminar-hall.jpg",
