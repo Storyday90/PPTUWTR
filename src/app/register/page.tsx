@@ -13,6 +13,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { SocialAuthButtons } from "@/components/auth/social-auth-buttons";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -44,6 +45,7 @@ export default function RegisterPage() {
                 <p className="eyebrow text-foreground/50">PPUWTR Club</p>
                 <h1 className="display mt-2 text-3xl">Daftar Akaun</h1>
               </div>
+              <SocialAuthButtons mode="register" />
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                 <div className="space-y-1.5">
                   <Label htmlFor="name">Nama Penuh</Label>

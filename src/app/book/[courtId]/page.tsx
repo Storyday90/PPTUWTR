@@ -221,7 +221,13 @@ export default function BookCourtPage({ params }: { params: Promise<{ courtId: s
                     </p>
                   </>
                 ) : (
-                  <MonthCalendar courtId={courtId} monthStart={monthStart} onSelectDay={handleSelectDay} />
+                  <MonthCalendar
+                    courtId={courtId}
+                    monthStart={monthStart}
+                    selected={selected}
+                    onToggle={toggleSlot}
+                    onOpenWeek={handleSelectDay}
+                  />
                 )}
               </div>
             )}

@@ -14,6 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { SocialAuthButtons } from "@/components/auth/social-auth-buttons";
 
 export default function LoginPage() {
   return (
@@ -54,6 +55,7 @@ function LoginForm() {
                 <p className="eyebrow text-foreground/50">PPUWTR Club</p>
                 <h1 className="display mt-2 text-3xl">Log Masuk</h1>
               </div>
+              <SocialAuthButtons mode="login" />
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                 <div className="space-y-1.5">
                   <Label htmlFor="email">Emel</Label>
