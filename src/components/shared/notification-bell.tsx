@@ -5,6 +5,7 @@ import { Bell, CheckCheck } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { ms } from "date-fns/locale";
 import { useNotifications, useMarkNotificationsRead } from "@/hooks/useNotifications";
+import { useSession } from "@/hooks/useAuth";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -13,11 +14,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
-export function NotificationBell({ isAdmin }: { isAdmin?: boolean }) {
-  const { data } = useNotifications(true);
+export function NotificationBell({ className }: { className?: string }) {
+  const { data: session } = useSession();
+  const isAdmin = session?.role === "ADMIN";
+  const { data } = useNotifications(Boolean(session));
   const markRead = useMarkNotificationsRead();
   const unread = data?.unread ?? 0;
   const notifications = data?.notifications ?? [];
+
+  if (!session) return null;
 
   return (
     <DropdownMenu
@@ -28,7 +33,10 @@ export function NotificationBell({ isAdmin }: { isAdmin?: boolean }) {
       <DropdownMenuTrigger
         render={
           <button
-            className="relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-border transition-colors hover:bg-muted"
+            className={cn(
+              "relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-border transition-colors hover:bg-muted",
+              className,
+            )}
             aria-label="Notifikasi"
           >
             <Bell className="h-4 w-4" aria-hidden />

@@ -43,9 +43,38 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </Link>
         </nav>
       </aside>
-      <main className="flex-1 bg-background p-6">
-        <div className="mx-auto max-w-5xl">{children}</div>
-      </main>
+      <div className="flex min-w-0 flex-1 flex-col">
+        {/* Mobile admin nav — the sidebar is hidden on small screens */}
+        <div className="sticky top-0 z-30 border-b border-border bg-pitch text-pitch-foreground md:hidden">
+          <div className="flex h-14 items-center justify-between px-4">
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent font-heading text-sm font-extrabold text-accent-foreground">
+                P
+              </span>
+              <span className="font-heading text-sm font-extrabold uppercase tracking-tight">Panel Admin</span>
+            </div>
+            <Link href="/" className="text-xs font-bold uppercase tracking-wide text-pitch-foreground/60">
+              ← Laman Utama
+            </Link>
+          </div>
+          <nav className="flex gap-2 overflow-x-auto px-4 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="flex shrink-0 items-center gap-1.5 rounded-full border border-pitch-foreground/20 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wide text-pitch-foreground/80 transition-colors hover:bg-pitch-foreground/10 hover:text-accent"
+              >
+                <item.icon className="h-3.5 w-3.5" />
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        <main className="flex-1 bg-background p-4 sm:p-6">
+          <div className="mx-auto max-w-5xl">{children}</div>
+        </main>
+      </div>
     </div>
   );
 }

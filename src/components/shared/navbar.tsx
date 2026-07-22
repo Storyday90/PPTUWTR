@@ -74,7 +74,7 @@ function AuthArea({ onNavigate, mobile }: { onNavigate?: () => void; mobile?: bo
     // Desktop: notification bell + account dropdown.
     return (
       <div className="flex items-center gap-2">
-        <NotificationBell isAdmin={session.role === "ADMIN"} />
+        <NotificationBell />
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
@@ -160,18 +160,22 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:flex">
-          <AuthArea />
-        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="hidden md:flex">
+            <AuthArea />
+          </div>
 
-        <button
-          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Tutup menu" : "Buka menu"}
-          aria-expanded={open}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+          {/* Mobile: notification bell (self-hides when logged out) + menu toggle */}
+          <NotificationBell className="md:hidden" />
+          <button
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md md:hidden"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Tutup menu" : "Buka menu"}
+            aria-expanded={open}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (
