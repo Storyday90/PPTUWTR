@@ -3,7 +3,13 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import bcrypt from "bcryptjs";
 import { toJson } from "../src/lib/utils/json";
 
-const adapter = new PrismaPg({ connectionString: process.env.DIRECT_URL ?? process.env.DATABASE_URL });
+const adapter = new PrismaPg({
+  connectionString:
+    process.env.DATABASE_URL_UNPOOLED ??
+    process.env.POSTGRES_URL_NON_POOLING ??
+    process.env.DATABASE_URL ??
+    process.env.POSTGRES_URL,
+});
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
