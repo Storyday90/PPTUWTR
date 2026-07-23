@@ -15,6 +15,7 @@ export function useStats() {
         sportCount: number;
       }>;
     },
+    retry: 1,
     refetchInterval: 30_000,
   });
 }
